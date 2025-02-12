@@ -3,12 +3,16 @@ import { Answer } from "@/components/Answer";
 import { fetchAnswers, fetchQuestion } from "@/lib/data";
 import { HashtagIcon } from "@heroicons/react/24/outline";
 
-export default async function Page({
-  params,
-}: {
-  params: { id: string }
-}) {
-  const { id } = params;
+interface PageParams {
+  id: string;
+}
+
+interface Props {
+  params: Promise<PageParams>;
+}
+
+export default async function Page({ params }: Props) {
+  const { id } = await params;
   const question = await fetchQuestion(id);
   const answers = await fetchAnswers(id);
 
