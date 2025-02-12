@@ -22,7 +22,7 @@ export default function LoggedInUser({ name, avatar }: LoggedInUserProps) {
         <UserCircleIcon className="h-8 w-8 text-gray-400" />
       )}
       <span className="text-sm font-medium text-gray-700">
-        {name || 'Guest User'}
+        {name || 'Test User'}
       </span>
     </div>
   );
