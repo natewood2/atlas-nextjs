@@ -1,4 +1,3 @@
-// lib/definitions.ts
 export type User = {
   id: string;
   name: string;
@@ -16,7 +15,7 @@ export type Question = {
   title: string;
   topic_id: string;
   votes: number;
-  answer_id?: string; // Add this to track correct answer
+  answer_id?: string;
 };
 
 export interface Answer {
@@ -24,5 +23,4 @@ export interface Answer {
   id: string;
   answer: string;
   question_id: string;
-  // Remove votes and voted as they're not in the database
 }

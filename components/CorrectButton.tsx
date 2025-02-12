@@ -1,7 +1,6 @@
-// components/CorrectButton.tsx
 "use client";
 import { useState } from "react";
-import { markAnswerCorrect } from "@/lib/actions"; // Change this
+import { markAnswerCorrect } from "@/lib/actions";
 import { CheckIcon } from "@heroicons/react/24/outline";
 
 export default function CorrectButton({

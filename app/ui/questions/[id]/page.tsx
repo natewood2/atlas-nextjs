@@ -1,4 +1,3 @@
-// app/ui/questions/[id]/page.tsx
 import { AnswerQuestion } from "@/components/AnswerQuestion";
 import { Answer } from "@/components/Answer";
 import { fetchAnswers, fetchQuestion } from "@/lib/data";
@@ -11,7 +10,7 @@ type PageProps = {
 };
 
 export default async function Page({ params }: PageProps) {
-  const { id } = await params;
+  const { id } = params;
   const question = await fetchQuestion(id);
   const answers = await fetchAnswers(id);
 
@@ -39,7 +38,7 @@ export default async function Page({ params }: PageProps) {
           text={answer.answer}
           votes={answer.votes}
           question_id={question.id}
-          voted={answer.id === question.answer_id} // This will be true for the accepted answer
+          voted={answer.id === question.answer_id}
         />
       ))}
     </div>
