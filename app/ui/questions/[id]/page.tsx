@@ -3,13 +3,11 @@ import { Answer } from "@/components/Answer";
 import { fetchAnswers, fetchQuestion } from "@/lib/data";
 import { HashtagIcon } from "@heroicons/react/24/outline";
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
-export default async function Page({ params }: PageProps) {
+export default async function Page({
+  params,
+}: {
+  params: { id: string }
+}) {
   const { id } = params;
   const question = await fetchQuestion(id);
   const answers = await fetchAnswers(id);
@@ -18,7 +16,7 @@ export default async function Page({ params }: PageProps) {
     return <div>Question not found</div>;
   }
 
-  // Sort answers so the accepted one comes first
+  // sorting
   const sortedAnswers = answers.sort((a, b) => {
     if (a.id === question.answer_id) return -1;
     if (b.id === question.answer_id) return 1;
