@@ -4,14 +4,23 @@ import TopicLinks from "./TopicLinks";
 import NavLink from "./NavLink";
 import SignOutButton from "./SignOutButton";
 import NewTopicButton from "./NewTopicButton";
+import LoggedInUser from "./LoggedInUser";
+import { auth } from "@/auth";
 
 export default async function SideNav() {
+  const session = await auth();
+  const user = session?.user;
+
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2">
       <Logo />
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 overflow-scroll">
         <NavLink name="Topics" href="/ui" />
         <TopicLinks />
+        <LoggedInUser 
+          name={user?.name ?? undefined}
+          avatar={user?.image ?? undefined}
+        />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
         <NewTopicButton />
         <SignOutButton />

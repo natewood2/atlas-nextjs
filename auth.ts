@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import GitHub from "next-auth/providers/github";
 import { fetchUser } from "./lib/data";
 import bcrypt from "bcryptjs";
 
@@ -10,6 +11,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     buttonText: "#ffffff",
   },
   providers: [
+    GitHub({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
     Credentials({
       credentials: {
         email: {
@@ -21,7 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
       },
       //@ts-ignore
-    authorize: async (credentials: { email: string; password: string }) => {
+      authorize: async (credentials: { email: string; password: string }) => {
         const { email, password } = credentials;
         const user = await fetchUser(email);
         if (!user) return null; //@ts-ignore
@@ -33,8 +38,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   callbacks: {
     authorized: async ({ auth }) => {
-        // Logged in users are authenticated, otherwise redirect to login page
-        return !!auth;
+      return !!auth;
     },
   },
 });
